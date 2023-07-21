@@ -6,14 +6,14 @@ from flask_login import LoginManager
 
 # Database set up
 db = SQLAlchemy()
-DB_NAME = "database.db"
+# DB_NAME = "database.db"
 
 
 #  create flask app
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "sowemeetagain"
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///database.db'
     db.init_app(app)
 
     from .views import views
@@ -22,9 +22,9 @@ def create_app():
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
 
-    from .models import User
+    from .models import User, Post
 
-    create_database(app)
+    # create_database(app)
 
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
@@ -37,7 +37,8 @@ def create_app():
     return app
 
 
-def create_database(app):
-    if not path.exists("website/" + DB_NAME):
-        db.create_all(app=app)
-        print("Created database!")
+# def create_database(app):
+#     if not path.exists("website/" + DB_NAME):
+#         db.create_all(app=app)
+#         print("Created database!")
+ 
