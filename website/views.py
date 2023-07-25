@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Post
+from .models import Post, User, Comment
 from . import db
 
 views = Blueprint("views", __name__)
@@ -45,4 +45,37 @@ def delete_post(id):
         db.session.commit()
         flash('Post deleted.', category='success')
 
-    return redirected(url_for(views.home))
+    return redirect(url_for('views.home'))
+
+
+@views.route("/posts/<username>")
+@login_required
+def posts(username):
+    user = User.query.filter_by(username=username).first()
+
+    if not user:
+        flash('No user found.', category='error')
+        return redirect(url_for('views.home'))
+
+    posts = user.posts
+    return render_template("posts.html", user=current_user, posts=posts, username=username)
+
+
+@views.route("/create-comment/<post_id>", methods=['POST'])
+@login_required
+def create_comment(post_id):
+    text = request.form.get('text')
+
+    if not text:
+        flash('Comment cannot be empty.', category='error')
+    else:
+        post = Post.query.filter_by(id=post_id)
+        if post:
+            comment = Comment(text=text, author=current_user.id, post_id=post_id)
+            db.session.add(comment)
+            db.session.commit()
+
+        else:
+            flash('Post does not exist.', category='error')
+
+    return redirect(url_for('views.home'))

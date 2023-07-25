@@ -7,46 +7,43 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expanded-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <button class="navbar-toggler" 
-        type="button" 
-        data-bs-toggle="collapse" 
-        data-bs-target="#navbar"
-        ><span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/home">Home</a>
-            {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="/logout">Logout</a>
-            {% else %}
-            <a class="nav-item nav-link" href="/login">Login</a>
-            <a class="nav-item nav-link" href="/sign Up">Sign Up</a>
-            {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="/home">Home</a>
+              
+              <a class="nav-item nav-link" href="/logout">Logout</a>
+              
+              <a class="nav-item nav-link" href="/login">Login</a>
+              <a class="nav-item nav-link" href="/sign-up">Sign Up</a>
+              
+            </div>
+          </div>
         </div>
-    </div>
-    </div>
-</nav>
-{% with messages = get_flashed_messages(with_categories=True) %}
- {% if messages %}
-   {% for category, message in messages %}
-   {% if category == "error" %}
-   <div class="alert alert-danger alert_dismissible fade show" role="alert">
-     {{ message }}
-     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alert_dismissible fade show" role="alert">
+      </nav>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'error' %}
+      <div class="alert alert-danger alter-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    {% endif%}
-
-   {% endfor %}
- {% endif%}
-{% endwith %}
-<div class="container">{% block content %}{% endblock %}</div>
+      </div>
+      {% else %}
+      <div class="alert alert-success alter-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+      <div class="container">{% block content %}{% endblock %}</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
