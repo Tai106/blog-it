@@ -20,4 +20,4 @@
 * SQLAlchemy
 
 ## Screenshots
-* ![blog post p](https://github.com/Tai106/blog-it/assets/92614793/6bf4f84e-107d-469b-8b0e-b586cc3c5ffc)
+![blog post p](https://github.com/Tai106/blog-it/assets/92614793/6bf4f84e-107d-469b-8b0e-b586cc3c5ffc)
