@@ -113,5 +113,6 @@ def like(post_id):
     else:
         like = Like(author=current_user.id, post_id=post_id)
         db.session.add(like)
+        db.session.commit()
 
     return redirect(url_for('views.home'))
